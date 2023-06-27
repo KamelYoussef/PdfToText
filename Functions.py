@@ -121,5 +121,5 @@ def Merge_text(doc):
     s = ""
     for index, row in Category_text(doc).iterrows():
         s += ''.join((row['heading'],'\n',row['content']))
-    #return ' '.join(s.split())
-    return s
+    return ' '.join(s.split())
+    #return s
