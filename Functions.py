@@ -5,7 +5,6 @@ import numpy as np
 import unicodedata
 import contractions
 import string
-import nltk
 import yake
 
 
@@ -162,13 +161,17 @@ def merge_text(doc):
     return clean_text(" ".join(s.split()))
     # return s
 
+
 def clean_text(text):
     out = to_lowercase(text)
     out = standardize_accented_chars(out)
     out = remove_url(out)
     out = expand_contractions(out)
     out = remove_mentions_and_tags(out)
-    return remove_special_characters(out)
+    out = remove_special_characters(out)
+    out = remove_spaces(out)
+    return out
+
 
 def to_lowercase(text):
     return text.lower()
@@ -189,38 +192,44 @@ def remove_url(text):
 def expand_contractions(text):
     expanded_words = []
     for word in text.split():
-       expanded_words.append(contractions.fix(word))
-    return ' '.join(expanded_words)
+        expanded_words.append(contractions.fix(word))
+    return " ".join(expanded_words)
+
 
 def remove_mentions_and_tags(text):
-    text = re.sub(r'@\S*', '', text)
-    return re.sub(r'#\S*', '', text)
+    text = re.sub(r"@\S*", "", text)
+    return re.sub(r"#\S*", "", text)
+
 
 def remove_special_characters(text):
     # define the pattern to keep
-    pat = r'[^a-zA-z0-9.,!?/:;\"\'\s]'
-    return re.sub(pat, '', text)
+    pat = r"[^a-zA-z0-9.,!?/:;\"\'\s]"
+    return re.sub(pat, "", text)
+
+
+def remove_spaces(text):
+    return re.sub(" +", " ", text)
+
 
 def remove_punctuation(text):
-    return ''.join([c for c in text if c not in string.punctuation])
+    return "".join([c for c in text if c not in string.punctuation])
 
 
 def remove_stopwords(text, nlp):
     filtered_sentence = []
     doc = nlp(text)
     for token in doc:
-
         if token.is_stop == False:
             filtered_sentence.append(token.text)
     return " ".join(filtered_sentence)
 
 
 def lemmatize(text, nlp):
-   doc = nlp(text)
-   lemmatized_text = []
-   for token in doc:
-     lemmatized_text.append(token.lemma_)
-   return " ".join(lemmatized_text)
+    doc = nlp(text)
+    lemmatized_text = []
+    for token in doc:
+        lemmatized_text.append(token.lemma_)
+    return " ".join(lemmatized_text)
 
 
 def extract_keywords(text):
