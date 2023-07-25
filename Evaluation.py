@@ -4,9 +4,8 @@ from rouge import Rouge
 
 text = open_file("CleanText")
 
-extractive_summary = open_file("ExtractiveSummary")
-abstractive_summary = open_file("Tfidf")
-
+extractive_summary = open_file("chatgpt")
+abstractive_summary = open_file("chatgpt2")
 
 def evaluate_rouge(reference_text, summary_text):
     rouge = Rouge()

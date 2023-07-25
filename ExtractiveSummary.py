@@ -75,4 +75,4 @@ def generate_summary(text, n):
 
 
 text = open_file("CleanText")
-save_file("ExtractiveSummary", generate_summary(text, 30))
+save_file("ExtractiveSummary", generate_summary(text, 50))

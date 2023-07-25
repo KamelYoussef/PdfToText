@@ -39,4 +39,4 @@ def generate_summary(text, n):
 
 text = open_file("CleanText")
 
-save_file("Tfidf", generate_summary(text, 30))
+save_file("Tfidf", generate_summary(text, 50))

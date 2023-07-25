@@ -1,7 +1,7 @@
 from Functions import *
 import fitz
 
-my_path = "test2.pdf"
+my_path = "test1.pdf"
 pdf = fitz.open(my_path)
 
 # print(extract_text(pdf))
