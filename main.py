@@ -11,6 +11,4 @@ pdf = fitz.open(my_path)
 # print(merge_text(pdf))
 # print(extract_keywords(merge_text(pdf)))
 
-with open("text2.txt", "w") as file:
-    file.write(merge_text(pdf))
-
+save_file("CleanText", merge_text(pdf))

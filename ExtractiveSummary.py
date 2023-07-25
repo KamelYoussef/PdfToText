@@ -1,5 +1,6 @@
 # import the required libraries
 import nltk
+from Functions import *
 
 nltk.download("punkt")  # punkt tokenizer for sentence tokenization
 nltk.download(
@@ -16,6 +17,7 @@ from nltk.tokenize import (
     sent_tokenize,
     word_tokenize,
 )  # Imports the sentence tokenizer and word tokenizer from the NLTK tokenizer module.
+
 
 # Sentence tokenizer is for splitting text into sentences
 # word tokenizer is for splitting sentences into words
@@ -69,10 +71,8 @@ def generate_summary(text, n):
     ]
     summary = " ".join(summary_sentences)
 
-    return summary_sentences
+    return summary
 
 
-with open("text2.txt", "r") as file:
-    text = file.read()
-
-print(generate_summary(text, 20))
+text = open_file("CleanText")
+save_file("ExtractiveSummary", generate_summary(text, 30))

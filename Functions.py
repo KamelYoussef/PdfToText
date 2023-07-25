@@ -236,3 +236,13 @@ def extract_keywords(text):
     kw_extractor = yake.KeywordExtractor(top=20, stopwords=None)
     keywords = kw_extractor.extract_keywords(text)
     return [kw for kw, v in keywords]
+
+
+def save_file(name, doc):
+    with open(name + ".txt", "w") as file:
+        file.write(doc)
+
+
+def open_file(name):
+    with open(name + ".txt", "r") as file:
+        return file.read()
