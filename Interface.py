@@ -1,7 +1,7 @@
 import glob
 import os
 import sys
-from ExtractiveSummary import *
+from Tfidf import *
 from Functions import *
 import gradio as gr
 import fitz
@@ -13,8 +13,8 @@ def summarize_text(text, number_sentences):
     return generate_summary(text, number_sentences)
 
 
-# input = gr.inputs.File(type="file", label="PDF File")
-number_sentences = gr.inputs.Slider(1, 50, 1)
+input = gr.inputs.File(type="file", label="PDF File")
+number_sentences = gr.inputs.Slider(1, 100, 1)
 output_text = gr.outputs.Textbox()
 
 gr.Interface(summarize_text, ["textbox", number_sentences], output_text).launch()
