@@ -2,10 +2,10 @@ from rouge_score import rouge_scorer
 from Functions import *
 from rouge import Rouge
 
-text = open_file("CleanText")
+text = open_file("Output/CleanText")
 
-extractive_summary = open_file("chatgpt")
-abstractive_summary = open_file("chatgpt2")
+extractive_summary = open_file("Output/chatgpt")
+abstractive_summary = open_file("Output/chatgpt2")
 
 
 def evaluate_rouge(reference_text, summary_text):

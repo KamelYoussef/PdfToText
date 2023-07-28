@@ -74,5 +74,5 @@ def generate_summary(text, n):
     return summary
 
 
-text = open_file("CleanText")
-save_file("ExtractiveSummary", generate_summary(text, 50))
+text = open_file("Output/CleanText")
+save_file("Output/ExtractiveSummary", generate_summary(text, 50))
