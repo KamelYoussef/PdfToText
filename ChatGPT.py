@@ -1,7 +1,7 @@
 import openai
 from Functions import *
 
-openai.api_key = "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"
+openai.api_key = ""
 
 messages = []
 
