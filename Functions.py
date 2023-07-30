@@ -11,6 +11,7 @@ from io import BytesIO
 import os
 import argparse
 import fitz
+from Tfidf import *
 
 
 def extract_text(doc):
@@ -316,13 +317,13 @@ def frame_matching_data(page, matched_values):
     # Loop throughout matching values
     for val in matched_values:
         matches_found += 1
-        matching_val_area = page.searchFor(val)
+        matching_val_area = page.search_for(val)
         for area in matching_val_area:
             if isinstance(area, fitz.fitz.Rect):
                 # Draw a rectangle around matched values
-                annot = page.addRectAnnot(area)
+                annot = page.add_rect_annot(area)
                 # , fill = fitz.utils.getColor('black')
-                annot.setColors(stroke=fitz.utils.getColor("red"))
+                annot.set_colors(stroke=fitz.utils.getColor("red"))
                 # If you want to remove matched data
                 # page.addFreetextAnnot(area, ' ')
                 annot.update()
@@ -343,9 +344,9 @@ def highlight_matching_data(page, matched_values, type):
         if type == "Highlight":
             highlight = page.add_highlight_annot(matching_val_area)
         elif type == "Squiggly":
-            highlight = page.addSquigglyAnnot(matching_val_area)
+            highlight = page.add_squiggly_annot(matching_val_area)
         elif type == "Underline":
-            highlight = page.addUnderlineAnnot(matching_val_area)
+            highlight = page.add_underline_annot(matching_val_area)
         elif type == "Strikeout":
             highlight = page.addStrikeoutAnnot(matching_val_area)
         else:
@@ -456,13 +457,16 @@ def process_file(**kwargs):
         # Remove the Highlights except Redactions
         remove_highlght(input_file=input_file, output_file=output_file, pages=pages)
     else:
-        process_data(
-            input_file=input_file,
-            output_file=output_file,
-            search_str=search_str,
-            pages=pages,
-            action=action,
-        )
+        text = Functions.open_file("Output/CleanText")
+        s = generate_summary(text, 50)
+        for str in s:
+            process_data(
+                input_file=input_file,
+                output_file=output_file,
+                search_str=str,
+                pages=pages,
+                action=action,
+            )
 
 
 def process_folder(**kwargs):
@@ -554,7 +558,7 @@ def parse_args():
             "-s",
             "--search_str",
             dest="search_str",  # lambda x: os.path.has_valid_dir_syntax(x)
-            type=str,
+            type=is_valid_path,
             required=True,
             help="Enter a valid search string",
         )
@@ -588,4 +592,4 @@ from difflib import get_close_matches
 
 
 def closeMatches(patterns, word):
-    return get_close_matches(word, patterns)
+    return get_close_matches(word, patterns, 1, 0.4)

@@ -2,7 +2,7 @@ from Functions import *
 from Tfidf import *
 import fitz
 
-my_path = "Pdf_files/test1.pdf"
+my_path = "Pdf_files/test2.pdf"
 pdf = fitz.open(my_path)
 
 # print(extract_text(pdf))
@@ -13,10 +13,9 @@ pdf = fitz.open(my_path)
 # print(extract_keywords(merge_text(pdf)))
 
 # save_file("Output/CleanText", merge_text(pdf))
-# save_file("Output/Tfidf", generate_summary(merge_text(pdf), 50))
+# save_file("Output/Tfidf", str(generate_summary(merge_text(pdf), 50)))
 # print(generate_summary(merge_text(pdf), 50))
 # print(extract_info(my_path))
-
 
 if __name__ == "__main__":
     # Parsing command line arguments entered by user

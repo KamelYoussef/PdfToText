@@ -1,4 +1,5 @@
 # importing the required libraries
+import Functions
 from Functions import *
 
 # importing TfidfVectorizer class to convert a collection of raw documents to a matrix of TF-IDF features.
@@ -37,6 +38,6 @@ def generate_summary(text, n):
     return [sentences[i] for i in sorted(summary_sentences)]
 
 
-text = open_file("Output/CleanText")
+#text = Functions.open_file("Output/CleanText")
 
-save_file("Output/Tfidf", str(generate_summary(text, 50)))
+#save_file("Output/Tfidf", str(generate_summary(text, 50)))
