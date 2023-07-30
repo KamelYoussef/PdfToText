@@ -282,7 +282,8 @@ def search_for_text(lines, search_str):
     """
     for line in lines:
         # Find all matches within one line
-        results = re.findall(search_str, line, re.IGNORECASE)
+        # results = re.findall(search_str, line, re.IGNORECASE)
+        results = closeMatches([line], search_str)
         # In case multiple matches within one line
         for result in results:
             yield result
@@ -348,7 +349,7 @@ def highlight_matching_data(page, matched_values, type):
         elif type == "Strikeout":
             highlight = page.addStrikeoutAnnot(matching_val_area)
         else:
-            highlight = page.addHighlightAnnot(matching_val_area)
+            highlight = page.add_highlight_annot(matching_val_area)
         # To change the highlight colar
         # highlight.setColors({"stroke":(0,0,1),"fill":(0.75,0.8,0.95) })
         # highlight.setColors(stroke = fitz.utils.getColor('white'), fill = fitz.utils.getColor('red'))
@@ -581,3 +582,10 @@ def parse_args():
     print("\n".join("{}:{}".format(i, j) for i, j in args.items()))
     print("######################################################################")
     return args
+
+
+from difflib import get_close_matches
+
+
+def closeMatches(patterns, word):
+    return get_close_matches(word, patterns)

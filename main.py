@@ -15,6 +15,7 @@ pdf = fitz.open(my_path)
 # save_file("Output/CleanText", merge_text(pdf))
 # save_file("Output/Tfidf", generate_summary(merge_text(pdf), 50))
 # print(generate_summary(merge_text(pdf), 50))
+# print(extract_info(my_path))
 
 
 if __name__ == "__main__":
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     # If File Path
     if os.path.isfile(args["input_path"]):
         # Extracting File Info
-        extract_info(input_file=args["input_path"])
+        # extract_info(input_file=args["input_path"])
         # Process a file
         process_file(
             input_file=args["input_path"],
