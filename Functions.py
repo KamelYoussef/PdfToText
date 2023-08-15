@@ -592,4 +592,4 @@ from difflib import get_close_matches
 
 
 def closeMatches(patterns, word):
-    return get_close_matches(word, patterns, 1, 0.4)
+    return get_close_matches(word, patterns, 3, 0.5)

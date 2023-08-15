@@ -35,7 +35,7 @@ def generate_summary(text, n):
 
     summary_tfidf = " ".join([sentences[i] for i in sorted(summary_sentences)])
 
-    return [sentences[i] for i in sorted(summary_sentences)]
+    return summary_tfidf
 
 
 #text = Functions.open_file("Output/CleanText")
